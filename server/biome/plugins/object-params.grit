@@ -1,0 +1,14 @@
+language js
+
+or {
+  `function $name($params) { $body }`,
+  `async function $name($params) { $body }`,
+  `const $name = ($params) => $body`,
+  `const $name = async ($params) => $body`
+} where {
+  $params <: r"(?s)^[^{(\[<]*,.*",
+  register_diagnostic(
+    span = $params,
+    message = "No positional arguments — take a single object param: fn({ a, b }: Args)."
+  )
+}

@@ -1,0 +1,9 @@
+language js
+
+`$expr as $type` where {
+  $type <: not r"^const$",
+  register_diagnostic(
+    span = $expr,
+    message = "No type assertions — narrow with zod/TypeBox or a type guard. Only `as const` is exempt; parse external/FFI data through a schema, never cast it."
+  )
+}
