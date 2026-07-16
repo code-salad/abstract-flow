@@ -1,0 +1,54 @@
+{
+  "name": "@vikyw/abstract-flow",
+  "version": "0.1.0",
+  "description": "Deterministic local TypeScript control-flow visualization",
+  "type": "module",
+  "bin": {
+    "abstract-flow": "./bin/abstract-flow.ts"
+  },
+  "exports": {
+    ".": "./server/src/index.ts",
+    "./server": "./server/src/index.ts"
+  },
+  "files": [
+    "bin/abstract-flow.ts",
+    "server/src",
+    "web/app",
+    "web/components",
+    "web/lib",
+    "web/package.json",
+    "web/next.config.ts",
+    "web/postcss.config.mjs",
+    "web/tsconfig.json",
+    "web/next-env.d.ts"
+  ],
+  "engines": {
+    "bun": ">=1.3.0"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/code-salad/abstract-flow.git"
+  },
+  "bugs": {
+    "url": "https://github.com/code-salad/abstract-flow/issues"
+  },
+  "homepage": "https://github.com/code-salad/abstract-flow#readme",
+  "dependencies": {
+    "@elysiajs/openapi": "^1.4.15",
+    "@tailwindcss/postcss": "^4.3.2",
+    "@types/bun": "^1.3.14",
+    "@types/node": "^24.0.0",
+    "@types/react": "^19.2.17",
+    "@types/react-dom": "^19.2.3",
+    "elysia": "^1.4.29",
+    "next": "^16.2.10",
+    "react": "^19.2.7",
+    "react-dom": "^19.2.7",
+    "tailwindcss": "^4.3.2",
+    "typescript": "~5.9",
+    "zod": "^4.4.3"
+  }
+}

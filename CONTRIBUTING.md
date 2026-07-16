@@ -8,6 +8,7 @@ Prerequisites: Bun, just. Then `just setup`.
 |---|---|
 | Run API (:3000) | `just dev-server` |
 | Run web (:3002) | `just dev-web` |
+| Run public site (:3003) | `just dev-site` |
 | Format + lint | `just check` |
 | Typecheck | `just typecheck` |
 | Tests | `just test` |
@@ -23,6 +24,22 @@ Prerequisites: Bun, just. Then `just setup`.
   resource), `services/`, `lib/`.
 - `web/lib/` — zod wire schemas + API client + pure layout engine (tested).
 - `web/app/`, `web/components/` — Next.js 16 App Router UI.
+- `site/` — separate static Next.js site for GitHub Pages. It must stay free of
+  runtime API rewrites and server-only code.
+- `bin/` — the published CLI. Keep it a thin launcher; reusable server behavior
+  belongs in `server/`.
+
+## Branches and releases
+
+- Target normal pull requests at `alpha`.
+- Use conventional commits (`feat:`, `fix:`, `docs:`, and so on), so Release
+  Please can calculate the next version and changelog.
+- To release, open and merge an `alpha` → `beta` pull request. Release Please
+  then creates its release pull request on `beta`; merging that publishes the
+  root `@vikyw/abstract-flow` package through npm trusted publishing.
+- Bootstrap `0.1.0` with a manual publish from the `vikyw` account, then set
+  the npm trusted-publisher record for this repository and workflow. Do not add
+  an npm token; later releases use GitHub Actions OIDC.
 
 ## Code style
 

@@ -3,14 +3,14 @@
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
-import { FlowCanvas } from "@/components/flow-canvas";
-import { fetchFlow, fetchSource } from "@/lib/api";
+import { FlowCanvas } from "../../components/flow-canvas";
+import { fetchFlow, fetchSource } from "../../lib/api";
 import type {
   FlowGraph,
   SourceAnchor,
   SourcePeek,
   SourceToken,
-} from "@/lib/types";
+} from "../../lib/types";
 
 // The breadcrumb IS the trace (F10): ?path=fn1,fn2,… — last one is in view.
 // The URL is the permalink (F16): repo project + entry point + focus path.
