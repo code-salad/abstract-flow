@@ -32,7 +32,11 @@ async function request<S extends z.ZodType>({
   return schema.parse(body);
 }
 
-export function openProject({ path }: { path: string }): Promise<ProjectInfo> {
+export function openProject({
+  path,
+}: {
+  path?: string;
+} = {}): Promise<ProjectInfo> {
   return request({
     path: "/projects",
     schema: projectInfo,

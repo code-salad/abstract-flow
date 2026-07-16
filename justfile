@@ -6,7 +6,7 @@ setup:
     cd web && bun install
 
 dev-server:
-    cd server && bun run --watch src/index.ts
+    bun run --watch server/src/index.ts
 
 dev-web:
     cd web && bun run dev

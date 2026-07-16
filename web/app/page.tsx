@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { openProject } from "@/lib/api";
 import type { ProjectInfo } from "@/lib/types";
 
@@ -19,7 +19,7 @@ export default function Home() {
   const [error, setError] = useState<string | undefined>();
   const [busy, setBusy] = useState(false);
 
-  const open = async () => {
+  const open = useCallback(async ({ path }: { path?: string } = {}) => {
     setBusy(true);
     setError(undefined);
     try {
@@ -29,7 +29,11 @@ export default function Home() {
     } finally {
       setBusy(false);
     }
-  };
+  }, []);
+
+  useEffect(() => {
+    void open();
+  }, [open]);
 
   const flowHref = ({ fnId }: { fnId: string }) =>
     project === undefined
@@ -40,8 +44,8 @@ export default function Home() {
     <main className="mx-auto max-w-3xl px-6 py-12">
       <h1 className="font-semibold text-2xl">Codeflow</h1>
       <p className="mt-1 text-sm text-zinc-400">
-        Point at a repo, pick an entry point, read the flow. Every node and edge
-        is derived from the AST — nothing is generated.
+        Explore the repo that started the server, or open another one. Every
+        node and edge is derived from the AST — nothing is generated.
       </p>
 
       <div className="mt-8 flex gap-2">
@@ -49,16 +53,16 @@ export default function Home() {
           value={path}
           onChange={(e) => setPath(e.target.value)}
           onKeyDown={(e) => {
-            if (e.key === "Enter") {
-              open();
+            if (e.key === "Enter" && path.trim() !== "") {
+              void open({ path });
             }
           }}
-          placeholder="/absolute/path/to/repo (try …/examples/express-demo)"
+          placeholder="/absolute/path/to/another/repo (optional)"
           className="grow rounded-md border border-zinc-700 bg-zinc-900 px-3 py-2 text-sm outline-none focus:border-zinc-500"
         />
         <button
           type="button"
-          onClick={open}
+          onClick={() => void open({ path })}
           disabled={busy || path.trim() === ""}
           className="rounded-md bg-zinc-200 px-4 py-2 font-medium text-sm text-zinc-900 disabled:opacity-40"
         >

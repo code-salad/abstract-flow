@@ -15,5 +15,5 @@ Prerequisites: [Bun](https://bun.sh), [just](https://github.com/casey/just).
 ```sh
 just setup
 just dev-server   # API on :3000
-just dev-web      # UI on :3002 — open, point it at examples/express-demo
+just dev-web      # UI on :3002 — automatically opens this repo
 ```
