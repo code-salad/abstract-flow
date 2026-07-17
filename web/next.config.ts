@@ -7,7 +7,7 @@ const DIST_DIR = process.env.NEXT_DIST_DIR ?? ".next";
 // /v1 routes, so browser calls stay same-origin (no CORS anywhere).
 const nextConfig: NextConfig = {
   distDir: DIST_DIR,
-  turbopack: { root: __dirname },
+  turbopack: { root: process.cwd() },
   transpilePackages: ["abstract-flow"],
   async rewrites() {
     return [{ source: "/api/:path*", destination: `${API_ORIGIN}/:path*` }];
