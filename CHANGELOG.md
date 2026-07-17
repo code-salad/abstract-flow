@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.3.0](https://github.com/code-salad/abstract-flow/compare/v0.2.2...v0.3.0) (2026-07-17)
+
+
+### Features
+
+* add agent analysis cli and svg export ([85ca396](https://github.com/code-salad/abstract-flow/commit/85ca3960af1956f938a897da9aafeadea696169e))
+
 ## [0.2.2](https://github.com/code-salad/abstract-flow/compare/v0.2.1...v0.2.2) (2026-07-17)
 
 
