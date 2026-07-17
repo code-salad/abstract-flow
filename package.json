@@ -22,6 +22,7 @@
   "files": [
     "bin/abstract-flow.ts",
     "server/src",
+    "web/.next-prod",
     "web/app",
     "web/components",
     "web/lib",
@@ -36,6 +37,10 @@
   },
   "publishConfig": {
     "access": "public"
+  },
+  "scripts": {
+    "build:web": "cd web && NEXT_DIST_DIR=.next-prod bun run build",
+    "prepack": "bun run build:web"
   },
   "repository": {
     "type": "git",

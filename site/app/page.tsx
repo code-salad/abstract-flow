@@ -1,5 +1,9 @@
 const repositoryUrl = "https://github.com/code-salad/abstract-flow";
 const packageName = "abstract-flow";
+const skillInstall = `git clone --depth 1 --branch beta https://github.com/code-salad/abstract-flow.git /tmp/abstract-flow
+cp -R /tmp/abstract-flow/skills/abstract-flow <agent-skill-root>/abstract-flow
+rm -rf /tmp/abstract-flow`;
+const skillUninstall = "rm -rf <agent-skill-root>/abstract-flow";
 
 function HeroDiagram() {
   return (
@@ -295,8 +299,8 @@ export default function Home() {
               <a className="button button--primary" href={repositoryUrl}>
                 View source <span aria-hidden="true">↗</span>
               </a>
-              <a className="button button--secondary" href="#package">
-                <span className="button-label">Package</span>
+              <a className="button button--secondary" href="#install">
+                <span className="button-label">Install</span>
                 <code>{packageName}</code>
               </a>
             </div>
@@ -480,6 +484,79 @@ export default function Home() {
             <a className="button button--primary" href={repositoryUrl}>
               Follow the source <span aria-hidden="true">↗</span>
             </a>
+          </div>
+        </section>
+
+        <section
+          className="install-section section-shell"
+          id="install"
+          aria-labelledby="install-title"
+        >
+          <div className="section-heading section-heading--compact">
+            <p className="eyebrow">Install locally</p>
+            <h2 id="install-title">Put the flow beside your code.</h2>
+            <p>
+              The CLI runs locally. The skill gives a coding agent a short,
+              deterministic path to routes, callers, branches, and SVG flows.
+            </p>
+          </div>
+
+          <div className="install-grid">
+            <article className="install-card">
+              <span className="card-index">01</span>
+              <h3>Run the CLI</h3>
+              <p>
+                Try it without changing your project, or add it as a local
+                development dependency.
+              </p>
+              <div className="install-command">
+                <span className="install-label">Try now</span>
+                <pre>
+                  <code>bunx abstract-flow</code>
+                </pre>
+              </div>
+              <div className="install-command">
+                <span className="install-label">Project install</span>
+                <pre>
+                  <code>{`bun add --dev abstract-flow
+bunx abstract-flow`}</code>
+                </pre>
+              </div>
+              <div className="install-command">
+                <span className="install-label">Uninstall</span>
+                <pre>
+                  <code>bun remove abstract-flow</code>
+                </pre>
+              </div>
+              <p className="install-note">
+                A <code>bunx</code>-only run does not add a project dependency.
+              </p>
+            </article>
+
+            <article className="install-card">
+              <span className="card-index">02</span>
+              <h3>Teach your coding agent</h3>
+              <p>
+                Copy the portable <code>SKILL.md</code> directory into the skill
+                root your agent already scans.
+              </p>
+              <div className="install-command">
+                <span className="install-label">Install skill</span>
+                <pre>
+                  <code>{skillInstall}</code>
+                </pre>
+              </div>
+              <div className="install-command">
+                <span className="install-label">Uninstall skill</span>
+                <pre>
+                  <code>{skillUninstall}</code>
+                </pre>
+              </div>
+              <p className="install-note">
+                Removing the skill does not remove project code or generated
+                diagrams.
+              </p>
+            </article>
           </div>
         </section>
       </main>

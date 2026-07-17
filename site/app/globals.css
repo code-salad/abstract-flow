@@ -721,6 +721,75 @@ h3 {
     rgb(24 24 27 / 72%);
 }
 
+.install-section {
+  padding-bottom: 6rem;
+}
+
+.install-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem;
+}
+
+.install-card {
+  border: 1px solid #27272a;
+  border-radius: 0.65rem;
+  background: rgb(24 24 27 / 65%);
+  padding: 1.3rem;
+}
+
+.install-card .card-index {
+  margin-bottom: 2rem;
+}
+
+.install-card h3 {
+  margin-bottom: 0.7rem;
+}
+
+.install-card > p {
+  margin-bottom: 1.4rem;
+  color: #a1a1aa;
+  font-size: 0.9rem;
+  line-height: 1.65;
+}
+
+.install-command {
+  margin-top: 1.1rem;
+}
+
+.install-label {
+  color: #71717a;
+  font-family:
+    ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono",
+    monospace;
+  font-size: 0.58rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.install-command pre {
+  margin: 0.45rem 0 0;
+  overflow-x: auto;
+  border: 1px solid #3f3f46;
+  border-radius: 0.45rem;
+  background: #09090b;
+  padding: 0.75rem;
+}
+
+.install-command code {
+  color: #d4d4d8;
+  font-size: 0.72rem;
+  line-height: 1.65;
+  white-space: pre;
+}
+
+.install-card > p.install-note {
+  margin: 1.2rem 0 0;
+  color: #71717a;
+  font-size: 0.76rem;
+}
+
 .package-section h2 {
   margin-bottom: 0.85rem;
   font-size: clamp(1.8rem, 3.5vw, 3rem);
@@ -803,6 +872,10 @@ a:focus-visible {
   }
 
   .card-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .install-grid {
     grid-template-columns: 1fr;
   }
 
