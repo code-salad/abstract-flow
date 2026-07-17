@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.2.0](https://github.com/code-salad/abstract-flow/compare/v0.1.1...v0.2.0) (2026-07-17)
+
+
+### Features
+
+* ship production cli and agent skill ([a0cf91c](https://github.com/code-salad/abstract-flow/commit/a0cf91cea9c4909973c5f4abbaefd274b51f5677))
+
 ## [0.1.1](https://github.com/code-salad/abstract-flow/compare/v0.1.0...v0.1.1) (2026-07-17)
 
 
