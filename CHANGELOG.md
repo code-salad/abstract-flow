@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.1.1](https://github.com/code-salad/abstract-flow/compare/v0.1.0...v0.1.1) (2026-07-17)
+
+
+### Bug Fixes
+
+* add npm package metadata ([2893671](https://github.com/code-salad/abstract-flow/commit/2893671f9fd1001c69bdadcb4346985348b93de0))
+* add npm package metadata ([55f2d7c](https://github.com/code-salad/abstract-flow/commit/55f2d7c8db030d0863c191b19623b40128357ced))
+
 ## 0.1.0 (2026-07-17)
 
 
