@@ -1,3 +1,4 @@
+import { resolve } from "node:path";
 import type { NextConfig } from "next";
 
 const API_ORIGIN = process.env.API_ORIGIN ?? "http://localhost:3000";
@@ -7,7 +8,7 @@ const DIST_DIR = process.env.NEXT_DIST_DIR ?? ".next";
 // /v1 routes, so browser calls stay same-origin (no CORS anywhere).
 const nextConfig: NextConfig = {
   distDir: DIST_DIR,
-  turbopack: { root: process.cwd() },
+  turbopack: { root: resolve(process.cwd(), "..") },
   transpilePackages: ["abstract-flow"],
   async rewrites() {
     return [{ source: "/api/:path*", destination: `${API_ORIGIN}/:path*` }];
