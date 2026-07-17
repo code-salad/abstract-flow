@@ -8,7 +8,7 @@ import {
   sourcePeek,
 } from "./types";
 
-// Same-origin: /api/* is rewritten to the backend by next.config.ts.
+// Same-origin: the Next route handler forwards /api/* to the backend.
 const BASE = "/api/v1";
 
 async function request<S extends z.ZodType>({
