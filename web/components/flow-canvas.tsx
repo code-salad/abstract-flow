@@ -1,9 +1,9 @@
 "use client";
 
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
-import { fetchFlow } from "@/lib/api";
-import { layoutGraph } from "@/lib/layout";
-import type { CallRef, FlowGraph, FlowNode, SourceAnchor } from "@/lib/types";
+import { fetchFlow } from "../lib/api";
+import { layoutGraph } from "../lib/layout";
+import type { CallRef, FlowGraph, FlowNode, SourceAnchor } from "../lib/types";
 
 const COL_W = 300;
 const NODE_W = 264;

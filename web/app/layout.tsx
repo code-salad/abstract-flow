@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "Codeflow",
+  title: "Abstract Flow",
   description: "Deterministic code flow visualization — no LLM in between.",
 };
 

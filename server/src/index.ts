@@ -14,5 +14,5 @@ export const app = new Elysia()
 
 if (import.meta.main) {
   app.listen(env.PORT);
-  console.log(`codeflow api on :${env.PORT}`);
+  console.log(`abstract-flow api on :${env.PORT}`);
 }
