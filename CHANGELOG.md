@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.2.1](https://github.com/code-salad/abstract-flow/compare/v0.2.0...v0.2.1) (2026-07-17)
+
+
+### Bug Fixes
+
+* resolve production build root ([6547e0e](https://github.com/code-salad/abstract-flow/commit/6547e0e10d4a8c777a3a8835202551b7fb96ca01))
+
 ## [0.2.0](https://github.com/code-salad/abstract-flow/compare/v0.1.1...v0.2.0) (2026-07-17)
 
 
