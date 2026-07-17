@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.2.2](https://github.com/code-salad/abstract-flow/compare/v0.2.1...v0.2.2) (2026-07-17)
+
+
+### Bug Fixes
+
+* anchor turbopack at repository root ([e70f200](https://github.com/code-salad/abstract-flow/commit/e70f20001edead6434bac0fe11cecb78bc64b77f))
+
 ## [0.2.1](https://github.com/code-salad/abstract-flow/compare/v0.2.0...v0.2.1) (2026-07-17)
 
 
