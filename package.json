@@ -2,6 +2,15 @@
   "name": "abstract-flow",
   "version": "0.1.0",
   "description": "Deterministic local TypeScript control-flow visualization",
+  "author": "vikyw",
+  "keywords": [
+    "typescript",
+    "control-flow",
+    "control-flow-graph",
+    "ast",
+    "code-analysis",
+    "code-visualization"
+  ],
   "type": "module",
   "bin": {
     "abstract-flow": "./bin/abstract-flow.ts"
