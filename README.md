@@ -11,9 +11,43 @@ and API together, and a server export for embedding in another Bun service.
 
 ```sh
 bunx abstract-flow
-# UI: http://localhost:3002
-# API: http://localhost:3000
+# UI: http://localhost:41730
+# API: http://localhost:41731
+# Uses the bundled production Next.js build
 ```
+
+To install it as a project dependency instead:
+
+```sh
+bun add --dev abstract-flow
+bunx abstract-flow
+```
+
+Remove a project-local installation with:
+
+```sh
+bun remove abstract-flow
+```
+
+If you only used `bunx`, there is no project dependency to remove.
+
+### Agent skill
+
+Copy `skills/abstract-flow/` into the skill directory your coding agent scans.
+
+```sh
+git clone --depth 1 --branch beta https://github.com/code-salad/abstract-flow.git /tmp/abstract-flow
+cp -R /tmp/abstract-flow/skills/abstract-flow <agent-skill-root>/abstract-flow
+rm -rf /tmp/abstract-flow
+```
+
+To uninstall the skill, remove only that installed directory:
+
+```sh
+rm -rf <agent-skill-root>/abstract-flow
+```
+
+Leave project code and generated flow diagrams untouched.
 
 To embed only the server:
 

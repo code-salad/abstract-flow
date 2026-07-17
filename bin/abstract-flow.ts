@@ -5,13 +5,16 @@ import { createRequire } from "node:module";
 import { resolve } from "node:path";
 import { parseArgs } from "node:util";
 
+const DEFAULT_WEB_PORT = 41_730;
+const DEFAULT_API_PORT = 41_731;
+
 const usage = `Usage: abstract-flow [options]
 
 Start Abstract Flow for the directory where this command is run.
 
 Options:
-  -p, --port <port>      Web UI port (default: 3002)
-      --api-port <port>  API port (default: 3000)
+  -p, --port <port>      Web UI port (default: ${DEFAULT_WEB_PORT})
+      --api-port <port>  API port (default: ${DEFAULT_API_PORT})
   -h, --help             Show this help`;
 
 function parsePort({
@@ -49,22 +52,25 @@ async function main() {
 
   const apiPort = parsePort({
     value: values["api-port"],
-    fallback: 3000,
+    fallback: DEFAULT_API_PORT,
     option: "--api-port",
   });
   const webPort = parsePort({
     value: values.port,
-    fallback: 3002,
+    fallback: DEFAULT_WEB_PORT,
     option: "--port",
   });
   const appRoot = resolve(import.meta.dir, "..");
   const serverEntry = resolve(appRoot, "server/src/index.ts");
   const webRoot = resolve(appRoot, "web");
+  const webBuild = resolve(webRoot, ".next-prod");
   const require = createRequire(import.meta.url);
   const nextEntry = require.resolve("next/dist/bin/next");
 
-  if (!existsSync(serverEntry) || !existsSync(webRoot)) {
-    throw new Error("Abstract Flow's server and web assets are missing from this package.");
+  if (!existsSync(serverEntry) || !existsSync(webRoot) || !existsSync(webBuild)) {
+    throw new Error(
+      "Abstract Flow's production server and web assets are missing from this package.",
+    );
   }
 
   const api = Bun.spawn(["bun", serverEntry], {
@@ -75,10 +81,14 @@ async function main() {
     stderr: "inherit",
   });
   const web = Bun.spawn(
-    [process.execPath, nextEntry, "dev", "--webpack", "-p", String(webPort)],
+    [process.execPath, nextEntry, "start", "-p", String(webPort)],
     {
       cwd: webRoot,
-      env: { ...process.env, API_ORIGIN: `http://localhost:${apiPort}` },
+      env: {
+        ...process.env,
+        API_ORIGIN: `http://localhost:${apiPort}`,
+        NEXT_DIST_DIR: ".next-prod",
+      },
       stdin: "inherit",
       stdout: "inherit",
       stderr: "inherit",

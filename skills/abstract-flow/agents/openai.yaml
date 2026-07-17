@@ -1,0 +1,4 @@
+interface:
+  display_name: "Abstract Flow"
+  short_description: "Inspect TypeScript flow without guessing"
+  default_prompt: "Use $abstract-flow to trace this TypeScript path and show verified callers, branches, and exits."
