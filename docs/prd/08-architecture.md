@@ -5,7 +5,7 @@ Built on the standard modern-fullstack stack (Bun + Elysia, Next.js 16, Drizzle,
 ## 8.1 Repo shape
 
 ```
-codeflow/
+abstract-flow/
   justfile          just setup / just dev / just ci
   server/           Bun + Elysia API — the analysis engine
   web/              Next.js 16 + React 19 — the flow canvas

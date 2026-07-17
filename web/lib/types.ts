@@ -110,7 +110,14 @@ export const projectInfo = z.object({
 export const sourcePeek = z.object({
   file: z.string(),
   startLine: z.number(),
-  lines: z.array(z.string()),
+  lines: z.array(
+    z.array(
+      z.object({
+        text: z.string(),
+        kind: z.enum(["plain", "keyword", "string", "number", "comment"]),
+      }),
+    ),
+  ),
 });
 
 export type SourceAnchor = z.infer<typeof sourceAnchor>;
@@ -123,3 +130,4 @@ export type ExportEntry = z.infer<typeof exportEntry>;
 export type Entrypoints = z.infer<typeof entrypoints>;
 export type ProjectInfo = z.infer<typeof projectInfo>;
 export type SourcePeek = z.infer<typeof sourcePeek>;
+export type SourceToken = SourcePeek["lines"][number][number];

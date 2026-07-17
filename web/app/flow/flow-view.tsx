@@ -3,15 +3,70 @@
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
-import { FlowCanvas } from "@/components/flow-canvas";
-import { fetchFlow, fetchSource } from "@/lib/api";
-import type { FlowGraph, SourceAnchor, SourcePeek } from "@/lib/types";
+import { FlowCanvas } from "../../components/flow-canvas";
+import { fetchFlow, fetchSource } from "../../lib/api";
+import type {
+  FlowGraph,
+  SourceAnchor,
+  SourcePeek,
+  SourceToken,
+} from "../../lib/types";
 
 // The breadcrumb IS the trace (F10): ?path=fn1,fn2,… — last one is in view.
 // The URL is the permalink (F16): repo project + entry point + focus path.
 
 const shortName = ({ fnId }: { fnId: string }) =>
   fnId.split("#")[1]?.split(":")[0] ?? fnId;
+
+const TOKEN_STYLE: Record<SourceToken["kind"], string> = {
+  plain: "text-zinc-200",
+  keyword: "text-amber-400",
+  string: "text-emerald-400",
+  number: "text-orange-300",
+  comment: "text-zinc-500 italic",
+};
+
+function SourceCode({ source }: { source: SourcePeek }) {
+  let lineNumber = source.startLine;
+  return (
+    <pre className="overflow-x-auto p-3 font-mono text-xs leading-5">
+      <code className="block">
+        {source.lines.map((line) => {
+          const currentLine = lineNumber;
+          lineNumber += 1;
+          let offset = 0;
+          return (
+            <span
+              key={currentLine}
+              className="grid min-w-max grid-cols-[4ch_1fr] gap-3"
+            >
+              <span
+                aria-hidden="true"
+                className="select-none text-right text-zinc-600"
+              >
+                {String(currentLine).padStart(4)}
+              </span>
+              <span>
+                {line.map((token) => {
+                  const currentOffset = offset;
+                  offset += token.text.length;
+                  return (
+                    <span
+                      key={currentOffset}
+                      className={TOKEN_STYLE[token.kind]}
+                    >
+                      {token.text}
+                    </span>
+                  );
+                })}
+              </span>
+            </span>
+          );
+        })}
+      </code>
+    </pre>
+  );
+}
 
 export function FlowView({
   projectId,
@@ -133,16 +188,13 @@ export function FlowView({
                 ✕
               </button>
             </div>
-            <pre className="overflow-x-auto p-3 text-xs leading-5">
-              {peek.source === undefined
-                ? "…"
-                : peek.source.lines
-                    .map(
-                      (line, i) =>
-                        `${String(peek.source && peek.source.startLine + i).padStart(4)}  ${line}`,
-                    )
-                    .join("\n")}
-            </pre>
+            {peek.source === undefined ? (
+              <pre className="overflow-x-auto p-3 font-mono text-xs leading-5">
+                …
+              </pre>
+            ) : (
+              <SourceCode source={peek.source} />
+            )}
           </aside>
         )}
       </div>

@@ -1,4 +1,4 @@
-# PRD: Codeflow (working name)
+# PRD: Abstract Flow
 
 **Deterministic code flow visualization — understand a codebase without reading it line by line, and without an LLM in between.**
 
