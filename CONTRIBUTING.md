@@ -36,7 +36,8 @@ Prerequisites: Bun, just. Then `just setup`.
   Please can calculate the next version and changelog.
 - To release, open and merge an `alpha` → `beta` pull request. Release Please
   then creates its release pull request on `beta`; merging that publishes the
-  root `@vikyw/abstract-flow` package through npm trusted publishing.
+  root `abstract-flow` package through npm trusted publishing. GitHub Pages
+  also deploys from `beta`.
 - Bootstrap `0.1.0` with a manual publish from the `vikyw` account, then set
   the npm trusted-publisher record for this repository and workflow. Do not add
   an npm token; later releases use GitHub Actions OIDC.

@@ -1,5 +1,5 @@
 {
-  "name": "@vikyw/abstract-flow",
+  "name": "abstract-flow",
   "version": "0.1.0",
   "description": "Deterministic local TypeScript control-flow visualization",
   "type": "module",
@@ -35,7 +35,7 @@
   "bugs": {
     "url": "https://github.com/code-salad/abstract-flow/issues"
   },
-  "homepage": "https://github.com/code-salad/abstract-flow#readme",
+  "homepage": "https://code-salad.github.io/abstract-flow/",
   "dependencies": {
     "@elysiajs/openapi": "^1.4.15",
     "@tailwindcss/postcss": "^4.3.2",

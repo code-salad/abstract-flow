@@ -1,4 +1,4 @@
-# Codeflow
+# Abstract Flow
 
 Deterministic code flow visualization — navigable, branch-level control flow
 graphs derived from the TypeScript AST. No LLM anywhere in the pipeline: if the
@@ -6,11 +6,11 @@ tool shows an edge, that edge exists in the source. See [docs/prd](docs/prd/READ
 
 ## Run it
 
-Codeflow is one Bun package with two entry points: a CLI that runs the local UI
+Abstract Flow is one Bun package with two entry points: a CLI that runs the local UI
 and API together, and a server export for embedding in another Bun service.
 
 ```sh
-bunx @vikyw/abstract-flow
+bunx abstract-flow
 # UI: http://localhost:3002
 # API: http://localhost:3000
 ```
@@ -18,13 +18,15 @@ bunx @vikyw/abstract-flow
 To embed only the server:
 
 ```ts
-import { app } from "@vikyw/abstract-flow";
+import { app } from "abstract-flow";
 
 app.listen(3000);
 ```
 
 The package requires [Bun](https://bun.sh). The npm command becomes available
 once the first Release Please release has been published.
+
+Website: [code-salad.github.io/abstract-flow](https://code-salad.github.io/abstract-flow/)
 
 | Path | What |
 |---|---|
@@ -49,8 +51,8 @@ just dev-site     # public static site on :3003
 
 - `alpha` is the default integration branch. Open feature pull requests against it.
 - `beta` is the release branch. Promote `alpha` to `beta` when preparing a release.
-- [Release Please](https://github.com/googleapis/release-please) opens the version/changelog pull request on `beta`; after the npm trusted-publishing bootstrap, merging it publishes `@vikyw/abstract-flow`.
-- The Pages workflow builds `site/` from `alpha`. In GitHub, enable **Settings → Pages → GitHub Actions**. Private repositories need a GitHub plan that supports Pages.
+- [Release Please](https://github.com/googleapis/release-please) opens the version/changelog pull request on `beta`; after the npm trusted-publishing bootstrap, merging it publishes `abstract-flow`.
+- The Pages workflow builds `site/` from `beta` and deploys to [code-salad.github.io/abstract-flow](https://code-salad.github.io/abstract-flow/).
 
 For the first `0.1.0` publish, sign in locally with the `vikyw` npm account and
 run `npm publish --access public` from the release commit. Then configure npm

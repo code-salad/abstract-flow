@@ -1,5 +1,5 @@
 const repositoryUrl = "https://github.com/code-salad/abstract-flow";
-const packageName = "@vikyw/abstract-flow";
+const packageName = "abstract-flow";
 
 function HeroDiagram() {
   return (
@@ -268,11 +268,11 @@ export default function Home() {
         Skip to content
       </a>
       <header className="site-header" id="top">
-        <a aria-label="Codeflow home" className="wordmark" href="#top">
+        <a aria-label="Abstract Flow home" className="wordmark" href="#top">
           <span className="wordmark-mark" aria-hidden="true">
             ⌁
           </span>
-          Codeflow
+          Abstract Flow
         </a>
         <nav aria-label="Primary navigation">
           <a className="header-link" href={repositoryUrl}>
@@ -287,7 +287,7 @@ export default function Home() {
             <p className="eyebrow">Local · deterministic · TypeScript</p>
             <h1 id="hero-title">See where your code goes.</h1>
             <p className="hero-intro">
-              Codeflow maps TypeScript source into readable control-flow
+              Abstract Flow maps TypeScript source into readable control-flow
               diagrams—branches, calls, loops, returns, and error exits—without
               an LLM in the middle.
             </p>
@@ -328,8 +328,8 @@ export default function Home() {
               Source in. Facts out. Flow made visible.
             </h2>
             <p>
-              Codeflow records the structural facts that lead to each edge, so
-              the diagram stays grounded in the source you are reading.
+              Abstract Flow records the structural facts that lead to each edge,
+              so the diagram stays grounded in the source you are reading.
             </p>
           </div>
 
@@ -393,7 +393,10 @@ export default function Home() {
               </pre>
             </article>
 
-            <ol className="evidence-flow" aria-label="Codeflow analysis stages">
+            <ol
+              className="evidence-flow"
+              aria-label="Abstract Flow analysis stages"
+            >
               <li>
                 <span className="stage-index">01</span>
                 <div className="stage-card stage-card--source">
@@ -467,7 +470,7 @@ export default function Home() {
             <p className="eyebrow">Package identity</p>
             <h2 id="package-title">Keep the source in the conversation.</h2>
             <p>
-              Codeflow ships as a local CLI and a Bun server export in{" "}
+              Abstract Flow ships as a local CLI and a Bun server export in{" "}
               <code>{packageName}</code>. The first release will make the
               command available on npm.
             </p>
@@ -482,7 +485,7 @@ export default function Home() {
       </main>
 
       <footer className="site-footer section-shell">
-        <span>Codeflow analyzes code locally.</span>
+        <span>Abstract Flow analyzes code locally.</span>
         <a href={repositoryUrl}>
           Repository <span aria-hidden="true">↗</span>
         </a>

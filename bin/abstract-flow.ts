@@ -7,7 +7,7 @@ import { parseArgs } from "node:util";
 
 const usage = `Usage: abstract-flow [options]
 
-Start Codeflow for the directory where this command is run.
+Start Abstract Flow for the directory where this command is run.
 
 Options:
   -p, --port <port>      Web UI port (default: 3002)
@@ -64,7 +64,7 @@ async function main() {
   const nextEntry = require.resolve("next/dist/bin/next");
 
   if (!existsSync(serverEntry) || !existsSync(webRoot)) {
-    throw new Error("Codeflow's server and web assets are missing from this package.");
+    throw new Error("Abstract Flow's server and web assets are missing from this package.");
   }
 
   const api = Bun.spawn(["bun", serverEntry], {
@@ -99,7 +99,7 @@ async function main() {
   process.once("SIGINT", () => stop({ signal: "SIGINT" }));
   process.once("SIGTERM", () => stop({ signal: "SIGTERM" }));
 
-  console.log(`Codeflow: http://localhost:${webPort}`);
+  console.log(`Abstract Flow: http://localhost:${webPort}`);
   const exitCode = await Promise.race(children.map((child) => child.exited));
   stop({ signal: "SIGTERM" });
   await Promise.all(children.map((child) => child.exited));

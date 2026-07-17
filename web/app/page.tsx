@@ -48,7 +48,7 @@ export default function Home() {
 
   return (
     <main className="mx-auto max-w-3xl px-6 py-12">
-      <h1 className="font-semibold text-2xl">Codeflow</h1>
+      <h1 className="font-semibold text-2xl">Abstract Flow</h1>
       <p className="mt-1 text-sm text-zinc-400">
         Explore the repo that started the server. Every node and edge is derived
         from the AST — nothing is generated.

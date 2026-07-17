@@ -3,7 +3,7 @@
   "configVersion": 1,
   "workspaces": {
     "": {
-      "name": "@vikyw/abstract-flow",
+      "name": "abstract-flow",
       "dependencies": {
         "@elysiajs/openapi": "^1.4.15",
         "@tailwindcss/postcss": "^4.3.2",

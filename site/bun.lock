@@ -3,7 +3,7 @@
   "configVersion": 1,
   "workspaces": {
     "": {
-      "name": "@vikyw/abstract-flow-site",
+      "name": "abstract-flow-site",
       "dependencies": {
         "next": "^16.2.10",
         "react": "^19.2.7",
