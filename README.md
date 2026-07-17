@@ -31,6 +31,27 @@ bun remove abstract-flow
 
 If you only used `bunx`, there is no project dependency to remove.
 
+### Agent CLI
+
+Analysis commands stay in the terminal and do not start the web server:
+
+```sh
+bunx abstract-flow entrypoints --repo .
+bunx abstract-flow flow 'src/routes.ts#list:12' --repo . --depth 0
+bunx abstract-flow refs 'src/routes.ts#list:12' --direction callers --repo .
+bunx abstract-flow search --kind exit --outcome throw --repo . --limit 20
+```
+
+Use `--json` for machine-readable output. Generate a standalone SVG that can
+be committed to documentation or attached to a pull request:
+
+```sh
+bunx abstract-flow svg 'src/routes.ts#list:12' --repo . --depth 1 \
+  -o docs/flows/list.svg
+```
+
+The SVG renderer is deterministic and has no Graphviz or browser dependency.
+
 ### Agent skill
 
 Copy `skills/abstract-flow/` into the skill directory your coding agent scans.
@@ -57,8 +78,8 @@ import { app } from "abstract-flow";
 app.listen(3000);
 ```
 
-The package requires [Bun](https://bun.sh). The npm command becomes available
-once `0.1.0` has been published.
+The package requires [Bun](https://bun.sh) and is published as
+`abstract-flow` on npm.
 
 Website: [code-salad.github.io/abstract-flow](https://code-salad.github.io/abstract-flow/)
 

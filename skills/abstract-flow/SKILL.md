@@ -5,32 +5,35 @@ description: Deterministic, AST-backed TypeScript control-flow and call-graph in
 
 # Abstract Flow
 
-Use the `abstract-flow` CLI for structural code questions that literal text
-search cannot answer cheaply. Use `rg` for literal text.
+Use `bunx abstract-flow` for structural code questions that literal text search
+cannot answer cheaply. If the project has the package installed, the same
+commands work as `abstract-flow`. Use `rg` for literal text.
 
 ## Workflow
 
-- Start with `abstract-flow entrypoints --repo .`.
+- Start with `bunx abstract-flow entrypoints --repo .`.
 - Use the exact function ID it returns with `flow` or `refs`.
-- Use `flow <id> --depth 0` for a compact branch summary; increase depth only when needed.
-- Use `refs <id> --direction callers` for impact and `--direction callees` for dependencies.
-- Use `search` for AST-aware relationships and outcomes. Keep `--limit` bounded.
+- Use `bunx abstract-flow flow <id> --depth 0` for a compact branch summary; increase depth only when needed.
+- Use `bunx abstract-flow refs <id> --direction callers` for impact and `--direction callees` for dependencies.
+- Use `bunx abstract-flow search` for AST-aware functions, calls, branches, exits, and routes. Keep `--limit` bounded.
 - Treat unresolved and dynamic calls as unknown; never infer a missing edge.
 - Read source only at reported file/line anchors when the graph is insufficient.
 
 ## Commands
 
 ```sh
-abstract-flow entrypoints --repo .
-abstract-flow flow '<file>#<function>:<line>' --repo . --depth 0
-abstract-flow refs '<file>#<function>:<line>' --direction both --repo . --json
-abstract-flow search --kind exit --outcome throw --repo . --limit 50
-abstract-flow svg '<file>#<function>:<line>' --repo . --depth 1 -o docs/flows/<name>.svg
+bunx abstract-flow entrypoints --repo .
+bunx abstract-flow flow '<file>#<function>:<line>' --repo . --depth 0
+bunx abstract-flow refs '<file>#<function>:<line>' --direction both --repo . --json
+bunx abstract-flow search --kind exit --outcome throw --repo . --limit 50
+bunx abstract-flow search --kind call --unresolved --repo . --limit 50
+bunx abstract-flow svg '<file>#<function>:<line>' --repo . --depth 1 -o docs/flows/<name>.svg
 ```
 
-The CLI is Bun-only. `bunx abstract-flow` starts the bundled production
-Next.js build on ports `41730` (web) and `41731` (API); override them with
-`--port` and `--api-port`.
+Analysis commands print compact text by default and accept `--json` for agent
+pipelines. The CLI is Bun-only. Running `bunx abstract-flow` without a
+subcommand starts the bundled production Next.js build on ports `41730` (web)
+and `41731` (API); override them with `--port` and `--api-port`.
 
 Use `--json` when another command must consume the result. Keep source bodies
 out of agent output unless explicitly needed.
