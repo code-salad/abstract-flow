@@ -24,7 +24,7 @@ app.listen(3000);
 ```
 
 The package requires [Bun](https://bun.sh). The npm command becomes available
-once the first Release Please release has been published.
+once `0.1.0` has been published.
 
 Website: [code-salad.github.io/abstract-flow](https://code-salad.github.io/abstract-flow/)
 
@@ -54,8 +54,9 @@ just dev-site     # public static site on :3003
 - [Release Please](https://github.com/googleapis/release-please) opens the version/changelog pull request on `beta`; after the npm trusted-publishing bootstrap, merging it publishes `abstract-flow`.
 - The Pages workflow builds `site/` from `beta` and deploys to [code-salad.github.io/abstract-flow](https://code-salad.github.io/abstract-flow/).
 
-For the first `0.1.0` publish, sign in locally with the `vikyw` npm account and
-run `npm publish --access public` from the release commit. Then configure npm
+For the first `0.1.0` publish, merge Release Please's initial release pull
+request so it creates the `v0.1.0` tag, then sign in locally with the `vikyw`
+npm account and run `npm publish --access public` from that tag. Configure npm
 trusted publishing for GitHub owner `code-salad`, repository `abstract-flow`,
 and workflow file `release-please.yml`; later releases require no npm token in
 this repository.

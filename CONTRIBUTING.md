@@ -38,9 +38,10 @@ Prerequisites: Bun, just. Then `just setup`.
   then creates its release pull request on `beta`; merging that publishes the
   root `abstract-flow` package through npm trusted publishing. GitHub Pages
   also deploys from `beta`.
-- Bootstrap `0.1.0` with a manual publish from the `vikyw` account, then set
-  the npm trusted-publisher record for this repository and workflow. Do not add
-  an npm token; later releases use GitHub Actions OIDC.
+- Bootstrap `0.1.0` after Release Please creates its `v0.1.0` tag: publish that
+  tag manually from the `vikyw` account, then set the npm trusted-publisher
+  record for this repository and workflow. Do not add an npm token; later
+  releases use GitHub Actions OIDC.
 
 ## Code style
 
