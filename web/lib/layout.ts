@@ -14,6 +14,15 @@ export type GraphLayout = {
 export function layoutGraph({ graph }: { graph: FlowGraph }): GraphLayout {
   const forward = graph.edges.filter((e) => e.back !== true);
   const byId = new Map(graph.nodes.map((n) => [n.id, n]));
+  const outgoing = new Map<string, typeof forward>();
+  for (const edge of forward) {
+    const edges = outgoing.get(edge.from);
+    if (edges === undefined) {
+      outgoing.set(edge.from, [edge]);
+    } else {
+      edges.push(edge);
+    }
+  }
 
   // Longest-path layering. Node emission order is topological for forward
   // edges (the CFG builder emits sources before targets), so one pass works.
@@ -22,7 +31,7 @@ export function layoutGraph({ graph }: { graph: FlowGraph }): GraphLayout {
     if (!layer.has(n.id)) {
       layer.set(n.id, 0);
     }
-    for (const e of forward.filter((e) => e.from === n.id)) {
+    for (const e of outgoing.get(n.id) ?? []) {
       const proposed = (layer.get(n.id) ?? 0) + 1;
       if (proposed > (layer.get(e.to) ?? 0)) {
         layer.set(e.to, proposed);
@@ -42,7 +51,7 @@ export function layoutGraph({ graph }: { graph: FlowGraph }): GraphLayout {
     if (!col.has(n.id)) {
       col.set(n.id, from);
     }
-    const outs = forward.filter((e) => e.from === n.id);
+    const outs = outgoing.get(n.id) ?? [];
     // Loop continuation ("done") stays on the spine; the body indents.
     const ordered =
       n.kind === "loop"

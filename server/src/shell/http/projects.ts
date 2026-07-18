@@ -6,7 +6,10 @@ export const projectRoutes = new Elysia({ prefix: "/v1" })
     "/projects",
     ({ body, set }) => {
       try {
-        const project = openProject({ repoPath: body.path ?? process.cwd() });
+        const project = openProject({
+          repoPath: body.path ?? process.cwd(),
+          force: body.force,
+        });
         return {
           id: project.id,
           root: project.index.root,
@@ -18,7 +21,12 @@ export const projectRoutes = new Elysia({ prefix: "/v1" })
         return { error: String(err) };
       }
     },
-    { body: t.Object({ path: t.Optional(t.String()) }) },
+    {
+      body: t.Object({
+        path: t.Optional(t.String()),
+        force: t.Optional(t.Boolean()),
+      }),
+    },
   )
   .get("/projects/:id/entrypoints", ({ params, set }) => {
     const project = getProject({ id: params.id });

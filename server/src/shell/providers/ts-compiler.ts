@@ -530,6 +530,10 @@ export function indexProject({ repoPath }: { repoPath: string }): ProjectIndex {
       strict: false,
       noEmit: true,
       skipLibCheck: true,
+      // ponytail: every project source is already a root; load package
+      // declarations only if external calls need to become graph nodes.
+      noResolve: true,
+      types: [],
     },
   });
   const checker = program.getTypeChecker();

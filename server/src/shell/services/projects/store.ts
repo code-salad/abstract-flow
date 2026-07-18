@@ -1,5 +1,6 @@
 import { createHash } from "node:crypto";
 import { existsSync, statSync } from "node:fs";
+import { resolve } from "node:path";
 import { buildCfg } from "../../../core/cfg";
 import { detectEntrypoints } from "../../../core/entrypoints";
 import type { Entrypoints, FlowGraph } from "../../../core/types";
@@ -17,12 +18,24 @@ type Project = {
 
 const projects = new Map<string, Project>();
 
-export function openProject({ repoPath }: { repoPath: string }): Project {
-  if (!existsSync(repoPath) || !statSync(repoPath).isDirectory()) {
+export function openProject({
+  repoPath,
+  force = false,
+}: {
+  repoPath: string;
+  force?: boolean;
+}): Project {
+  const root = resolve(repoPath);
+  if (!existsSync(root) || !statSync(root).isDirectory()) {
     throw new Error(`not a directory: ${repoPath}`);
   }
-  const index = indexProject({ repoPath });
-  const id = createHash("sha1").update(index.root).digest("hex").slice(0, 8);
+  const id = createHash("sha1").update(root).digest("hex").slice(0, 8);
+  const cached = projects.get(id);
+  if (!force && cached?.index.root === root) {
+    return cached;
+  }
+
+  const index = indexProject({ repoPath: root });
   const entrypoints = detectEntrypoints({
     functions: [...index.functions.values()],
     callSites: index.callSites,
