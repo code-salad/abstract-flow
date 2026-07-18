@@ -55,24 +55,31 @@ export function FlowCanvas({
       return;
     }
     const cRect = container.getBoundingClientRect();
-    const rectOf = (id: string) => {
-      const el = container.querySelector(`[data-node="${CSS.escape(id)}"]`);
-      if (el === null) {
-        return undefined;
+    const rects = new Map<
+      string,
+      { top: number; bottom: number; left: number; right: number; cx: number }
+    >();
+    for (const el of container.querySelectorAll<HTMLElement>("[data-node]")) {
+      if (el.closest("[data-flow-canvas]") !== container) {
+        continue;
+      }
+      const id = el.dataset.node;
+      if (id === undefined) {
+        continue;
       }
       const r = el.getBoundingClientRect();
-      return {
+      rects.set(id, {
         top: r.top - cRect.top,
         bottom: r.bottom - cRect.top,
         left: r.left - cRect.left,
         right: r.right - cRect.left,
         cx: r.left - cRect.left + r.width / 2,
-      };
-    };
+      });
+    }
     const next: EdgePath[] = [];
     for (const e of graph.edges) {
-      const a = rectOf(e.from);
-      const b = rectOf(e.to);
+      const a = rects.get(e.from);
+      const b = rects.get(e.to);
       if (a === undefined || b === undefined) {
         continue;
       }
@@ -116,12 +123,29 @@ export function FlowCanvas({
     if (container === null) {
       return;
     }
-    const ro = new ResizeObserver(() => measure());
+    let frame: number | undefined;
+    const schedule = () => {
+      if (frame !== undefined) {
+        return;
+      }
+      frame = requestAnimationFrame(() => {
+        frame = undefined;
+        measure();
+      });
+    };
+    const ro = new ResizeObserver(schedule);
     ro.observe(container);
-    for (const el of container.querySelectorAll("[data-node]")) {
-      ro.observe(el);
+    for (const el of container.querySelectorAll<HTMLElement>("[data-node]")) {
+      if (el.closest("[data-flow-canvas]") === container) {
+        ro.observe(el);
+      }
     }
-    return () => ro.disconnect();
+    return () => {
+      ro.disconnect();
+      if (frame !== undefined) {
+        cancelAnimationFrame(frame);
+      }
+    };
   }, [measure]);
 
   const toggleExpand = async ({
@@ -143,7 +167,12 @@ export function FlowCanvas({
   const width = (maxCol + 1) * COL_W;
 
   return (
-    <div ref={containerRef} className="relative" style={{ minWidth: width }}>
+    <div
+      ref={containerRef}
+      data-flow-canvas
+      className="relative"
+      style={{ minWidth: width }}
+    >
       <svg
         className="pointer-events-none absolute inset-0 h-full w-full"
         aria-hidden="true"

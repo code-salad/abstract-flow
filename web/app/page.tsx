@@ -20,17 +20,20 @@ export default function Home() {
   const [busy, setBusy] = useState(false);
   const [query, setQuery] = useState("");
 
-  const open = useCallback(async () => {
-    setBusy(true);
-    setError(undefined);
-    try {
-      setProject(await openProject());
-    } catch (err) {
-      setError(String(err));
-    } finally {
-      setBusy(false);
-    }
-  }, []);
+  const open = useCallback(
+    async ({ force = false }: { force?: boolean } = {}) => {
+      setBusy(true);
+      setError(undefined);
+      try {
+        setProject(await openProject({ force }));
+      } catch (err) {
+        setError(String(err));
+      } finally {
+        setBusy(false);
+      }
+    },
+    [],
+  );
 
   useEffect(() => {
     void open();
@@ -69,7 +72,7 @@ export default function Home() {
             </p>
             <button
               type="button"
-              onClick={() => void open()}
+              onClick={() => void open({ force: true })}
               disabled={busy}
               className="rounded border border-zinc-700 px-2 py-1 text-xs text-zinc-300 hover:bg-zinc-900 disabled:opacity-40"
             >

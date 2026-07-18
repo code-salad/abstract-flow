@@ -8,7 +8,7 @@ import {
   sourcePeek,
 } from "./types";
 
-// Same-origin: /api/* is rewritten to the backend by next.config.ts.
+// Same-origin: the Next route handler forwards /api/* to the backend.
 const BASE = "/api/v1";
 
 async function request<S extends z.ZodType>({
@@ -34,8 +34,10 @@ async function request<S extends z.ZodType>({
 
 export function openProject({
   path,
+  force,
 }: {
   path?: string;
+  force?: boolean;
 } = {}): Promise<ProjectInfo> {
   return request({
     path: "/projects",
@@ -43,7 +45,7 @@ export function openProject({
     init: {
       method: "POST",
       headers: { "content-type": "application/json" },
-      body: JSON.stringify({ path }),
+      body: JSON.stringify({ path, force }),
     },
   });
 }

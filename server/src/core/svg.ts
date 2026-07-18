@@ -38,16 +38,22 @@ const shorten = (value: string, max = 48): string => {
 function layoutGraph({ graph }: { graph: FlowGraph }): Layout {
   const forward = graph.edges.filter((edge) => edge.back !== true);
   const byId = new Map(graph.nodes.map((node) => [node.id, node]));
+  const outgoingByNode = new Map<string, typeof forward>();
+  for (const edge of forward) {
+    const outgoing = outgoingByNode.get(edge.from);
+    if (outgoing === undefined) {
+      outgoingByNode.set(edge.from, [edge]);
+    } else {
+      outgoing.push(edge);
+    }
+  }
   const layer = new Map<string, number>();
 
   for (const node of graph.nodes) {
     if (!layer.has(node.id)) {
       layer.set(node.id, 0);
     }
-    for (const edge of forward) {
-      if (edge.from !== node.id) {
-        continue;
-      }
+    for (const edge of outgoingByNode.get(node.id) ?? []) {
       const next = (layer.get(node.id) ?? 0) + 1;
       if (next > (layer.get(edge.to) ?? 0)) {
         layer.set(edge.to, next);
@@ -64,7 +70,7 @@ function layoutGraph({ graph }: { graph: FlowGraph }): Layout {
   for (const node of graph.nodes) {
     const from = col.get(node.id) ?? 0;
     col.set(node.id, from);
-    const outgoing = forward.filter((edge) => edge.from === node.id);
+    const outgoing = outgoingByNode.get(node.id) ?? [];
     const ordered =
       node.kind === "loop"
         ? [
